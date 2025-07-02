@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Straw Construction Group - Weather Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', sans-serif;
+      background: #f2f3f7;
+      color: #222;
+    }
+
+    header {
+      background: #1b1f2b;
+      color: #f5f5f5;
+      text-align: center;
+      padding: 40px 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: 0.5px;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #ccc;
+    }
+
+    .dashboard {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 40px 20px;
+      gap: 30px;
+    }
+
+    .city-box {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      padding: 25px;
+      text-align: center;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .city-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .city-box h2 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      color: #333;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+
+    .forecast-group {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+
+    .day {
+      flex: 1;
+      margin: 0 5px;
+    }
+
+    .day h3 {
+      font-size: 15px;
+      margin-bottom: 8px;
+      color: #666;
+    }
+
+    .icon {
+      font-size: 38px;
+      margin-bottom: 6px;
+    }
+
+    .info {
+      font-size: 14px;
+      font-weight: 600;
+      color: #222;
+    }
+
+    .extra-info {
+      margin-top: 15px;
+      font-size: 13px;
+      color: #444;
+      line-height: 1.5;
+      background: #f7f9fc;
+      border-radius: 8px;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to Straw Construction Group Internal Reporting System</h1>
+    <p>Current Weather Conditions for Key Job Locations</p>
+  </header>
+
+  <div class="dashboard" id="weather-dashboard">
+    <!-- Weather cards will appear here -->
+  </div>
+
+  <script>
+    const cities = [
+      { name: "Toronto", lat: 43.7, lon: -79.42 },
+      { name: "Richmond Hill", lat: 43.8828, lon: -79.4403 },
+      { name: "Barrie (Simcoe)", lat: 44.3894, lon: -79.6903 }
+    ];
+
+    const iconMap = {
+      0: '☀️', 1: '🌤️', 2: '⛅', 3: '☁️',
+      45: '🌫️', 48: '🌫️', 51: '🌧️', 53: '🌧️', 55: '🌧️',
+      56: '🌧️', 57: '🌧️', 61: '🌧️', 63: '🌧️', 65: '🌧️',
+      66: '❄️', 67: '❄️', 71: '❄️', 73: '❄️', 75: '❄️',
+      77: '❄️', 80: '🌦️', 81: '🌦️', 82: '🌦️',
+      85: '🌨️', 86: '🌨️', 95: '⛈️', 96: '⛈️', 99: '⛈️'
+    };
+
+    function calculateHumidex(temp, humidity) {
+      const e = (humidity / 100) * 6.105 * Math.exp((17.27 * temp) / (237.7 + temp));
+      return Math.round(temp + 0.5555 * (e - 10));
+    }
+
+    async function fetchWeather(city) {
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&current_weather=true&hourly=relativehumidity_2m&timezone=America%2FToronto`;
+      const res = await fetch(url);
+      const data = await res.json();
+
+      const now = new Date();
+      const currentHour = now.getHours();
+      const humidity = data.hourly.relativehumidity_2m[currentHour];
+      const temp = data.current_weather.temperature;
+      const wind = data.current_weather.windspeed;
+      const weatherCode = data.current_weather.weathercode;
+      const humidex = calculateHumidex(temp, humidity);
+
+      const forecasts = [
+        {
+          label: "Now",
+          code: weatherCode,
+          temp: temp
+        }
+      ];
+
+      renderCityCard(city.name, forecasts, wind, humidex);
+    }
+
+    function renderCityCard(cityName, forecasts, wind, humidex) {
+      const container = document.getElementById('weather-dashboard');
+
+      const html = `
+        <div class="city-box">
+          <h2>${cityName}</h2>
+          <div class="forecast-group">
+            ${forecasts.map(f => `
+              <div class="day">
+                <h3>${f.label}</h3>
+                <div class="icon">${iconMap[f.code] || '❓'}</div>
+                <div class="info">${Math.round(f.temp)}°C</div>
+              </div>
+            `).join('')}
+          </div>
+          <div class="extra-info">
+            <strong>Wind:</strong> ${wind} km/h<br/>
+            <strong>Humidex:</strong> ${humidex}°C
+          </div>
+        </div>
+      `;
+      container.insertAdjacentHTML('beforeend', html);
+    }
+
+    cities.forEach(fetchWeather);
+  </script>
+</body>
+</html>
