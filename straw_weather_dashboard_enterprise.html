@@ -1,187 +1,109 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Straw Construction Group - Weather Dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Straw Weather Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
     body {
       margin: 0;
-      font-family: 'Helvetica Neue', sans-serif;
-      background: #f2f3f7;
-      color: #222;
+      font-family: 'Roboto', sans-serif;
+      background-color: #121212;
+      color: #f4f4f4;
     }
-
-    header {
-      background: #1b1f2b;
-      color: #f5f5f5;
-      text-align: center;
-      padding: 40px 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 28px;
-      letter-spacing: 0.5px;
-    }
-
-    header p {
-      margin-top: 10px;
-      font-size: 16px;
-      color: #ccc;
-    }
-
     .dashboard {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 40px 20px;
-      gap: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
     }
-
-    .city-box {
-      background: #ffffff;
+    .city-card {
+      background: linear-gradient(145deg, #1e1e1e, #2c2c2c);
+      border: 1px solid #333;
       border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-      width: 300px;
-      padding: 25px;
-      text-align: center;
-      transition: transform 0.2s ease-in-out;
+      padding: 1.5rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease;
     }
-
-    .city-box:hover {
+    .city-card:hover {
       transform: translateY(-5px);
     }
-
-    .city-box h2 {
-      margin: 0 0 12px;
-      font-size: 22px;
-      color: #333;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 10px;
+    .city-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffd700;
     }
-
-    .forecast-group {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 20px;
+    .weather-section {
+      margin-top: 1rem;
     }
-
-    .day {
-      flex: 1;
-      margin: 0 5px;
+    .label {
+      font-size: 0.9rem;
+      color: #ccc;
     }
-
-    .day h3 {
-      font-size: 15px;
-      margin-bottom: 8px;
-      color: #666;
+    .value {
+      font-size: 1.2rem;
+      font-weight: bold;
     }
-
-    .icon {
-      font-size: 38px;
-      margin-bottom: 6px;
-    }
-
-    .info {
-      font-size: 14px;
-      font-weight: 600;
-      color: #222;
-    }
-
-    .extra-info {
-      margin-top: 15px;
-      font-size: 13px;
-      color: #444;
-      line-height: 1.5;
-      background: #f7f9fc;
-      border-radius: 8px;
-      padding: 10px;
+    .divider {
+      margin: 1rem 0;
+      border-top: 1px solid #333;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Welcome to Straw Construction Group Internal Reporting System</h1>
-    <p>Current Weather Conditions for Key Job Locations</p>
-  </header>
 
-  <div class="dashboard" id="weather-dashboard">
-    <!-- Weather cards will appear here -->
+  <h1 style="text-align:center; color:#ffd700; margin-top: 1rem;">Straw Weather Dashboard</h1>
+
+  <div class="dashboard">
+    <!-- Toronto -->
+    <div class="city-card">
+      <div class="city-name">Toronto</div>
+      <div class="weather-section">
+        <div class="label">Today</div>
+        <div class="value">24°C, Sunny ☀️</div>
+        <div class="label">Wind: 14 km/h | Humidity: 58%</div>
+      </div>
+      <div class="divider"></div>
+      <div class="weather-section">
+        <div class="label">Tomorrow</div>
+        <div class="value">27°C, Cloudy ⛅</div>
+        <div class="label">Wind: 18 km/h | Humidity: 65%</div>
+      </div>
+    </div>
+
+    <!-- Richmond Hill -->
+    <div class="city-card">
+      <div class="city-name">Richmond Hill</div>
+      <div class="weather-section">
+        <div class="label">Today</div>
+        <div class="value">23°C, Partly Cloudy 🌤️</div>
+        <div class="label">Wind: 12 km/h | Humidity: 60%</div>
+      </div>
+      <div class="divider"></div>
+      <div class="weather-section">
+        <div class="label">Tomorrow</div>
+        <div class="value">26°C, Showers 🌦️</div>
+        <div class="label">Wind: 16 km/h | Humidity: 72%</div>
+      </div>
+    </div>
+
+    <!-- Barrie -->
+    <div class="city-card">
+      <div class="city-name">Barrie (Simcoe)</div>
+      <div class="weather-section">
+        <div class="label">Today</div>
+        <div class="value">22°C, Windy 💨</div>
+        <div class="label">Wind: 25 km/h | Humidity: 63%</div>
+      </div>
+      <div class="divider"></div>
+      <div class="weather-section">
+        <div class="label">Tomorrow</div>
+        <div class="value">24°C, Thunderstorms ⛈️</div>
+        <div class="label">Wind: 20 km/h | Humidity: 70%</div>
+      </div>
+    </div>
   </div>
 
-  <script>
-    const cities = [
-      { name: "Toronto", lat: 43.7, lon: -79.42 },
-      { name: "Richmond Hill", lat: 43.8828, lon: -79.4403 },
-      { name: "Barrie (Simcoe)", lat: 44.3894, lon: -79.6903 }
-    ];
-
-    const iconMap = {
-      0: '☀️', 1: '🌤️', 2: '⛅', 3: '☁️',
-      45: '🌫️', 48: '🌫️', 51: '🌧️', 53: '🌧️', 55: '🌧️',
-      56: '🌧️', 57: '🌧️', 61: '🌧️', 63: '🌧️', 65: '🌧️',
-      66: '❄️', 67: '❄️', 71: '❄️', 73: '❄️', 75: '❄️',
-      77: '❄️', 80: '🌦️', 81: '🌦️', 82: '🌦️',
-      85: '🌨️', 86: '🌨️', 95: '⛈️', 96: '⛈️', 99: '⛈️'
-    };
-
-    function calculateHumidex(temp, humidity) {
-      const e = (humidity / 100) * 6.105 * Math.exp((17.27 * temp) / (237.7 + temp));
-      return Math.round(temp + 0.5555 * (e - 10));
-    }
-
-    async function fetchWeather(city) {
-      const url = `https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&current_weather=true&hourly=relativehumidity_2m&timezone=America%2FToronto`;
-      const res = await fetch(url);
-      const data = await res.json();
-
-      const now = new Date();
-      const currentHour = now.getHours();
-      const humidity = data.hourly.relativehumidity_2m[currentHour];
-      const temp = data.current_weather.temperature;
-      const wind = data.current_weather.windspeed;
-      const weatherCode = data.current_weather.weathercode;
-      const humidex = calculateHumidex(temp, humidity);
-
-      const forecasts = [
-        {
-          label: "Now",
-          code: weatherCode,
-          temp: temp
-        }
-      ];
-
-      renderCityCard(city.name, forecasts, wind, humidex);
-    }
-
-    function renderCityCard(cityName, forecasts, wind, humidex) {
-      const container = document.getElementById('weather-dashboard');
-
-      const html = `
-        <div class="city-box">
-          <h2>${cityName}</h2>
-          <div class="forecast-group">
-            ${forecasts.map(f => `
-              <div class="day">
-                <h3>${f.label}</h3>
-                <div class="icon">${iconMap[f.code] || '❓'}</div>
-                <div class="info">${Math.round(f.temp)}°C</div>
-              </div>
-            `).join('')}
-          </div>
-          <div class="extra-info">
-            <strong>Wind:</strong> ${wind} km/h<br/>
-            <strong>Humidex:</strong> ${humidex}°C
-          </div>
-        </div>
-      `;
-      container.insertAdjacentHTML('beforeend', html);
-    }
-
-    cities.forEach(fetchWeather);
-  </script>
 </body>
 </html>
