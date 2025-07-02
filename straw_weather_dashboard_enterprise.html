@@ -12,6 +12,24 @@
       background-color: #121212;
       color: #f4f4f4;
     }
+    .header {
+      background-color: #1c1c1c;
+      padding: 2rem;
+      text-align: center;
+      border-bottom: 2px solid #ffd700;
+    }
+    .header h1 {
+      color: #ffd700;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .header p {
+      max-width: 800px;
+      margin: 0 auto 1rem;
+      line-height: 1.6;
+      font-size: 1rem;
+      color: #ddd;
+    }
     .dashboard {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -53,7 +71,20 @@
 </head>
 <body>
 
-  <h1 style="text-align:center; color:#ffd700; margin-top: 1rem;">Straw Weather Dashboard</h1>
+  <div class="header">
+    <h1>WELCOME TO STRAW CONSTRUCTION GROUP INTERNAL REPORTING SYSTEM</h1>
+    <p>
+      This platform has been designed to streamline the submission and tracking of injury and incident reports.
+      Please use this system to enter accurate and timely information related to workplace incidents.
+    </p>
+    <p>
+      If you experience any technical difficulties or have questions about using the platform,
+      please contact the IT department for support.
+    </p>
+    <p>
+      Thank you for helping us maintain a safe and compliant work environment.
+    </p>
+  </div>
 
   <div class="dashboard">
     <!-- Toronto -->
