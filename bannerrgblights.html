@@ -7,27 +7,27 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom animation for pulsating RGB purple glow - more flowing and luxurious */
-        @keyframes pulse-rgb-purple {
+        /* Custom animation for pulsating RGB tech IQ glow */
+        @keyframes pulse-rgb-tech {
             0% {
-                box-shadow: 0 0 20px 5px rgba(170, 0, 255, 0.5),   /* Brighter Purple */
-                            0 0 40px 10px rgba(255, 0, 200, 0.4),  /* Pinkish Magenta */
-                            0 0 60px 15px rgba(0, 200, 255, 0.3);  /* Light Blue/Cyan */
+                box-shadow: 0 0 25px 8px rgba(0, 255, 255, 0.6),   /* Electric Cyan */
+                            0 0 50px 15px rgba(255, 0, 255, 0.5),  /* Bright Magenta */
+                            0 0 75px 20px rgba(255, 206, 10, 0.4); /* Flashy Yellow/Amber (#ffce0a) */
             }
             50% {
-                box-shadow: 0 0 30px 10px rgba(170, 0, 255, 0.8),
-                            0 0 60px 20px rgba(255, 0, 200, 0.7),
-                            0 0 90px 30px rgba(0, 200, 255, 0.6);
+                box-shadow: 0 0 40px 12px rgba(0, 255, 255, 0.9),
+                            0 0 80px 25px rgba(255, 0, 255, 0.8),
+                            0 0 120px 35px rgba(255, 206, 10, 0.7);
             }
             100% {
-                box-shadow: 0 0 20px 5px rgba(170, 0, 255, 0.5),
-                            0 0 40px 10px rgba(255, 0, 200, 0.4),
-                            0 0 60px 15px rgba(0, 200, 255, 0.3);
+                box-shadow: 0 0 25px 8px rgba(0, 255, 255, 0.6),
+                            0 0 50px 15px rgba(255, 0, 255, 0.5),
+                            0 0 75px 20px rgba(255, 206, 10, 0.4);
             }
         }
 
-        .animate-pulse-rgb-purple {
-            animation: pulse-rgb-purple 4s infinite alternate ease-in-out; /* Slower, smoother animation */
+        .animate-pulse-rgb-tech {
+            animation: pulse-rgb-tech 3s infinite alternate ease-in-out; /* Slightly faster, more intense */
         }
 
         /* Basic body styling for top placement */
@@ -36,17 +36,19 @@
             padding: 0; /* Ensure no default body padding */
             box-sizing: border-box; /* Include padding in element's total width and height */
             overflow-x: hidden; /* Prevent horizontal scrollbar if glow extends beyond viewport */
+            background-color: #0d0d0d; /* Dark background for contrast */
         }
     </style>
 </head>
 <body>
 
-    <!-- The RGB Purple Glowing Line -->
-    <div class="w-full h-1 bg-gradient-to-r from-purple-900 via-fuchsia-700 to-blue-800
-                rounded-full animate-pulse-rgb-purple">
-        <!-- The 'w-full' ensures it spans the full width. -->
-        <!-- 'h-1' sets height, 'bg-gradient-to-r' creates the base color with richer tones. -->
-        <!-- 'rounded-full' makes it rounded, 'animate-pulse-rgb-purple' applies the custom glowing animation. -->
+    <!-- The RGB Tech IQ Glowing Line -->
+    <div class="w-full min-w-[1000px] h-1 bg-gradient-to-r from-blue-900 via-purple-900 to-yellow-500
+                rounded-full animate-pulse-rgb-tech mx-auto">
+        <!-- The 'w-full' ensures it spans the full width, 'min-w-[1000px]' guarantees a minimum width. -->
+        <!-- 'h-1' sets height, 'bg-gradient-to-r' creates the base color with richer tones incorporating yellow. -->
+        <!-- 'rounded-full' makes it rounded, 'animate-pulse-rgb-tech' applies the custom glowing animation. -->
+        <!-- 'mx-auto' centers the line if the screen is wider than its minimum width. -->
     </div>
 
 </body>
