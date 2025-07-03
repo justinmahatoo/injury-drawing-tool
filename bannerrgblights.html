@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RGB Glowing Line</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom animation for pulsating RGB purple glow */
+        @keyframes pulse-rgb-purple {
+            0% {
+                box-shadow: 0 0 5px rgba(128, 0, 128, 0.7), /* Purple */
+                            0 0 10px rgba(255, 0, 255, 0.7), /* Magenta */
+                            0 0 15px rgba(75, 0, 130, 0.7); /* Indigo */
+            }
+            50% {
+                box-shadow: 0 0 15px rgba(128, 0, 128, 1),
+                            0 0 25px rgba(255, 0, 255, 1),
+                            0 0 35px rgba(75, 0, 130, 1);
+            }
+            100% {
+                box-shadow: 0 0 5px rgba(128, 0, 128, 0.7),
+                            0 0 10px rgba(255, 0, 255, 0.7),
+                            0 0 15px rgba(75, 0, 130, 0.7);
+            }
+        }
+
+        .animate-pulse-rgb-purple {
+            animation: pulse-rgb-purple 3s infinite alternate;
+        }
+
+        /* Basic body styling - removed background and centering for top placement */
+        body {
+            /* background-color: #1a202c; -- Removed black background */
+            /* Removed display: flex, justify-content, align-items, min-height for top alignment */
+            margin: 0; /* Ensure no default body margin */
+            padding: 0; /* Ensure no default body padding */
+            box-sizing: border-box; /* Include padding in element's total width and height */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- The RGB Purple Glowing Line -->
+    <div class="w-full h-1 bg-gradient-to-r from-purple-700 via-fuchsia-500 to-indigo-700
+                rounded-full animate-pulse-rgb-purple">
+        <!-- The 'w-full' makes it span full width, 'h-1' sets height, 'bg-gradient-to-r' creates the base color -->
+        <!-- 'rounded-full' makes it rounded, 'animate-pulse-rgb-purple' applies the custom glowing animation -->
+        <!-- Removed 'max-w-4xl' and 'my-4 mx-auto' to ensure it's a full-width line at the top -->
+    </div>
+
+</body>
+</html>
