@@ -7,47 +7,46 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom animation for pulsating RGB purple glow */
+        /* Custom animation for pulsating RGB purple glow - more flowing and luxurious */
         @keyframes pulse-rgb-purple {
             0% {
-                box-shadow: 0 0 5px rgba(128, 0, 128, 0.7), /* Purple */
-                            0 0 10px rgba(255, 0, 255, 0.7), /* Magenta */
-                            0 0 15px rgba(75, 0, 130, 0.7); /* Indigo */
+                box-shadow: 0 0 20px 5px rgba(170, 0, 255, 0.5),   /* Brighter Purple */
+                            0 0 40px 10px rgba(255, 0, 200, 0.4),  /* Pinkish Magenta */
+                            0 0 60px 15px rgba(0, 200, 255, 0.3);  /* Light Blue/Cyan */
             }
             50% {
-                box-shadow: 0 0 15px rgba(128, 0, 128, 1),
-                            0 0 25px rgba(255, 0, 255, 1),
-                            0 0 35px rgba(75, 0, 130, 1);
+                box-shadow: 0 0 30px 10px rgba(170, 0, 255, 0.8),
+                            0 0 60px 20px rgba(255, 0, 200, 0.7),
+                            0 0 90px 30px rgba(0, 200, 255, 0.6);
             }
             100% {
-                box-shadow: 0 0 5px rgba(128, 0, 128, 0.7),
-                            0 0 10px rgba(255, 0, 255, 0.7),
-                            0 0 15px rgba(75, 0, 130, 0.7);
+                box-shadow: 0 0 20px 5px rgba(170, 0, 255, 0.5),
+                            0 0 40px 10px rgba(255, 0, 200, 0.4),
+                            0 0 60px 15px rgba(0, 200, 255, 0.3);
             }
         }
 
         .animate-pulse-rgb-purple {
-            animation: pulse-rgb-purple 3s infinite alternate;
+            animation: pulse-rgb-purple 4s infinite alternate ease-in-out; /* Slower, smoother animation */
         }
 
-        /* Basic body styling - removed background and centering for top placement */
+        /* Basic body styling for top placement */
         body {
-            /* background-color: #1a202c; -- Removed black background */
-            /* Removed display: flex, justify-content, align-items, min-height for top alignment */
             margin: 0; /* Ensure no default body margin */
             padding: 0; /* Ensure no default body padding */
             box-sizing: border-box; /* Include padding in element's total width and height */
+            overflow-x: hidden; /* Prevent horizontal scrollbar if glow extends beyond viewport */
         }
     </style>
 </head>
 <body>
 
     <!-- The RGB Purple Glowing Line -->
-    <div class="w-full h-1 bg-gradient-to-r from-purple-700 via-fuchsia-500 to-indigo-700
+    <div class="w-full h-1 bg-gradient-to-r from-purple-900 via-fuchsia-700 to-blue-800
                 rounded-full animate-pulse-rgb-purple">
-        <!-- The 'w-full' makes it span full width, 'h-1' sets height, 'bg-gradient-to-r' creates the base color -->
-        <!-- 'rounded-full' makes it rounded, 'animate-pulse-rgb-purple' applies the custom glowing animation -->
-        <!-- Removed 'max-w-4xl' and 'my-4 mx-auto' to ensure it's a full-width line at the top -->
+        <!-- The 'w-full' ensures it spans the full width. -->
+        <!-- 'h-1' sets height, 'bg-gradient-to-r' creates the base color with richer tones. -->
+        <!-- 'rounded-full' makes it rounded, 'animate-pulse-rgb-purple' applies the custom glowing animation. -->
     </div>
 
 </body>
