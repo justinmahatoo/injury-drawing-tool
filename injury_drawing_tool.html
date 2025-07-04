@@ -1,52 +1,116 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Injury Diagram Drawing Tool</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    h2 {
+      padding: 1rem;
+    }
+
+    canvas {
+      border: 1px solid #ccc;
+      max-width: 90%;
+      height: auto;
+      touch-action: none; /* prevent scrolling while drawing */
+    }
+
+    button {
+      font-size: 1rem;
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
-<body style="text-align:center; font-family:Arial, sans-serif;">
+<body>
 
   <h2>📝 Mark Injured Areas</h2>
-  <canvas id="bodyCanvas" width="400" height="600" style="border:1px solid #ccc;"></canvas>
-  <br><br>
+  <canvas id="bodyCanvas" width="400" height="600"></canvas>
+  <br>
   <button onclick="clearCanvas()">🧽 Clear</button>
   <button onclick="saveDrawing()">💾 Save Drawing</button>
 
   <script>
     const canvas = document.getElementById('bodyCanvas');
     const ctx = canvas.getContext('2d');
-
     const img = new Image();
     img.crossOrigin = "anonymous";
     img.src = 'https://res.cloudinary.com/dlrnhvzqv/image/upload/v1749071121/image_40_p1chju.png';
 
-    img.onload = function () {
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    };
+    function resizeCanvas() {
+      const scale = Math.min(window.innerWidth * 0.9 / 400, 1);
+      canvas.style.width = 400 * scale + 'px';
+      canvas.style.height = 600 * scale + 'px';
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    img.onload = () => ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+    function getPos(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+      };
+    }
 
     let drawing = false;
 
-    canvas.addEventListener('mousedown', (e) => {
+    function startDraw(e) {
       drawing = true;
-      const rect = canvas.getBoundingClientRect();
+      const pos = getPos(e);
       ctx.beginPath();
-      ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
-    });
+      ctx.moveTo(pos.x, pos.y);
+      e.preventDefault();
+    }
 
-    canvas.addEventListener('mouseup', () => drawing = false);
-    canvas.addEventListener('mouseout', () => drawing = false);
-
-    canvas.addEventListener('mousemove', (e) => {
+    function draw(e) {
       if (!drawing) return;
-      const rect = canvas.getBoundingClientRect();
+      const pos = getPos(e);
       ctx.lineWidth = 2;
       ctx.lineCap = 'round';
       ctx.strokeStyle = 'red';
-      ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+      ctx.lineTo(pos.x, pos.y);
       ctx.stroke();
-    });
+      e.preventDefault();
+    }
+
+    function stopDraw() {
+      drawing = false;
+    }
+
+    // Mouse
+    canvas.addEventListener('mousedown', startDraw);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDraw);
+    canvas.addEventListener('mouseout', stopDraw);
+
+    // Touch
+    canvas.addEventListener('touchstart', startDraw);
+    canvas.addEventListener('touchmove', draw);
+    canvas.addEventListener('touchend', stopDraw);
+    canvas.addEventListener('touchcancel', stopDraw);
 
     function clearCanvas() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
